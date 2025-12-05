@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freddy Isaac Mandamientos Loa – Mi Página</title>
+    <title>Portafolio – Freddy Isaac Mandamientos Loa</title>
+
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f7f9fc;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #1f1f1f;
         }
+
+        /* 🔵 NAVBAR */
         .navbar {
             background: white;
             padding: 18px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .navbar .logo {
             font-size: 26px;
             font-weight: bold;
-            color: #1b3fa3;
+            color: #00215b;
         }
         .navbar .links a {
             margin-left: 40px;
@@ -29,77 +36,152 @@
             color: #333;
             font-weight: 500;
         }
-        .navbar .btn {
-            background: #1b3fa3;
-            padding: 10px 18px;
-            border-radius: 8px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
+        .navbar .links a:hover {
+            color: #1b3fa3;
         }
-        .container {
-            padding: 60px 80px;
+
+        /* 🔵 SECCIONES GENERALES */
+        section {
+            padding: 70px 80px;
+        }
+
+        /* 🔵 HERO */
+        #inicio {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .text-box {
-            width: 45%;
-        }
-        .text-box h3 {
-            color: #1b3fa3;
-            font-size: 18px;
-            font-weight: normal;
-        }
-        .text-box h1 {
-            font-size: 44px;
-            font-weight: bold;
+        #inicio .left h1 {
+            font-size: 46px;
             color: #00215b;
-            line-height: 1.2;
         }
-        .text-box p {
-            margin-top: 20px;
-            color: #444;
+        #inicio .left p {
             font-size: 18px;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-top: 15px;
         }
-        .text-box .btn-main {
-            display: inline-block;
+        .btn-main {
             background: #1b3fa3;
             color: white;
             padding: 12px 22px;
             border-radius: 10px;
-            margin-top: 25px;
             text-decoration: none;
             font-size: 18px;
-        }
-        .text-box .btn-sec {
+            margin-top: 20px;
             display: inline-block;
+        }
+        .btn-main:hover {
+            background: #15337d;
+        }
+        .btn-sec {
             background: #e2e8f0;
             color: #1b3fa3;
             padding: 12px 22px;
             border-radius: 10px;
-            margin-left: 10px;
-            margin-top: 25px;
             text-decoration: none;
             font-size: 18px;
+            margin-left: 10px;
+            margin-top: 20px;
+            display: inline-block;
         }
-        .right-img img {
-            width: 450px;
+
+        #inicio img {
+            width: 460px;
+            border-radius: 15px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+        }
+
+        /* 🔵 SOBRE MÍ */
+        #sobremi {
+            background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            margin: 40px 80px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.1);
         }
-        @media (max-width: 900px) {
-            .container {
+        #sobremi h2 {
+            color: #00215b;
+        }
+        #sobremi p {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* 🔵 PROYECTOS */
+        #proyectos {
+            background: #ffffff;
+        }
+        .cards {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .card {
+            width: 31%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        }
+        .card h3 {
+            color: #00215b;
+        }
+        .card button {
+            margin-top: 12px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: #1b3fa3;
+            color: white;
+            font-size: 16px;
+        }
+
+        /* 🔵 DASHBOARD */
+        #dashboard iframe {
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 🔵 CONTACTO */
+        #contacto {
+            background: #e8edf3;
+            text-align: center;
+        }
+        #contacto a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1b3fa3;
+        }
+
+        /* 🔵 FOOTER */
+        footer {
+            background: #00215b;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* 🔵 RESPONSIVO */
+        @media(max-width: 900px) {
+            #inicio {
                 flex-direction: column;
                 text-align: center;
             }
-            .text-box, .right-img {
-                width: 100%;
-            }
-            .right-img img {
+            #inicio img {
                 width: 100%;
                 margin-top: 30px;
+            }
+            .card {
+                width: 100%;
             }
         }
     </style>
@@ -107,46 +189,102 @@
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
-    <div class="logo">Freddy Isaac Mandamientos Loa</div>
+    <div class="logo">Freddy Mandamientos</div>
 
     <div class="links">
-        <a href="#">Inicio</a>
-        <a href="#">Proyectos</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Contacto</a>
+        <a href="#inicio">Inicio</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#contacto">Contacto</a>
     </div>
-
-    <a class="btn" href="#">Acceder</a>
 </div>
 
-<div class="container">
-    <div class="text-box">
-        <h3>Bienvenido a mi página personal</h3>
-        <h1>Descubre mis proyectos y dashboards.</h1>
+<!-- INICIO -->
+<section id="inicio">
+    <div class="left">
+        <h3>Bienvenido a mi sitio web</h3>
+        <h1>Portafolio profesional de Business Intelligence</h1>
         <p>
-            Explora mis trabajos, análisis y proyectos de datos.
+            Soy Freddy Isaac Mandamientos Loa, ingeniero industrial y electrónico, 
+            especializado en análisis de datos, Power BI, visualización avanzada y automatización.
         </p>
-        <a href="#" class="btn-main">Ver Portafolio</a>
-        <a href="#" class="btn-sec">Conocer más</a>
+
+        <a class="btn-main" href="#proyectos">Ver portafolio</a>
+        <a class="btn-sec" href="#sobremi">Conocer más</a>
     </div>
 
-    <div class="right-img">
-        <img src="https://i.postimg.cc/VN0pXDc5/analitica.jpg" alt="imagen">
+    <img src="https://i.postimg.cc/VN0pXDc5/analitica.jpg">
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobremi">
+    <h2>Sobre mí</h2>
+    <p>
+        Soy un profesional con experiencia en Business Intelligence, análisis de datos,
+        optimización de procesos y diseño de dashboards corporativos para toma de decisiones.
+        He trabajado en EGESUR en áreas de mejora continua, gestión comercial y análisis operativo.
+        <br><br>
+        Mis herramientas principales: Power BI, Python, Excel avanzado, DAX, Power Query y SQL.
+        <br><br>
+        <a class="btn-main" href="TU_LINK_AL_CV.pdf" target="_blank">Descargar CV</a>
+    </p>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+    <h2 style="color:#00215b;">Mis Proyectos</h2>
+    <div class="cards">
+
+        <div class="card">
+            <h3>Dashboard Gerencial Comercial</h3>
+            <p>Visualización ejecutiva con KPIs, tendencias y análisis comparativo.</p>
+            <button onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiN2M4YWNlMzItNGRiMi00NjQ1LWFhNzEtYzgyMTBmOGZhODNhIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9')">
+                Ver Dashboard
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Dashboard Operativo</h3>
+            <p>Indicadores energéticos, disponibilidad, mantenimientos y análisis técnico.</p>
+            <button onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiMGVlYzhmMzEtOTVhNi00MDk2LWE1NjgtYzg0OTA5ZGVkNTQ1IiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9')">
+                Ver Dashboard
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Repositorio de Proyectos</h3>
+            <p>Colección completa de análisis, automatizaciones y casos de estudio.</p>
+            <button onclick="window.open('https://freddymandamientos.github.io/Portfolio/')">
+                Ver Portafolio
+            </button>
+        </div>
+
     </div>
-</div>
-<!-- POWER BI EMBEBIDO -->
-<div style="width:100%; text-align:center; margin-top:50px; padding:40px; background:#ffffff;">
-    <h2>Mi Dashboard en Power BI</h2>
+</section>
+
+<!-- DASHBOARD EMBEBIDO -->
+<section id="dashboard">
+    <h2 style="color:#00215b;">Dashboard Integrado</h2>
 
     <iframe 
-        title="Power BI Freddy" 
-        width="100%" 
-        height="600" 
-        src="https://app.powerbi.com/view?r=eyJrIjoiZmNlZWNmMTQtMGJhNi00ZTA3LTlhMmMtZjQxNGM3YWEzMDQwIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9" 
-        frameborder="0" 
-        allowFullScreen="true">
+        src="https://app.powerbi.com/view?r=eyJrIjoiZmNlZWNmMTQtMGJhNi00ZTA3LTlhMmMtZjQxNGM3YWEzMDQwIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9"
+        allowfullscreen="true">
     </iframe>
-</div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <h2>Contacto</h2>
+    <p>Puedes escribirme al correo:</p>
+    <a href="mailto:freddymandamientos@gmail.com">freddymandamientos@gmail.com</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 – Freddy Isaac Mandamientos Loa | Portafolio Profesional
+</footer>
+
 </body>
 </html>
