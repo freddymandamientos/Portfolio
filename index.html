@@ -1,284 +1,646 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio – Freddy Isaac Mandamientos Loa</title>
+  <meta charset="UTF-8">
+  <title>Dashboard Comercial 2025 – Ejecutado vs Proyectado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-    margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #f5f7fa;
-    color: #1f1f1f;
-}
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-/* NAVBAR */
-.navbar {
-    background: white;
-    padding: 18px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.navbar .logo {
-    font-size: 26px;
-    font-weight: bold;
-    color: #00215b;
-}
-.navbar .links a {
-    margin-left: 40px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-}
-.navbar .links a:hover {
-    color: #1b3fa3;
-}
-
-/* SECCIONES */
-section {
-    padding: 70px 80px;
-}
-
-/* INICIO */
-#inicio {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-}
-#inicio h1 {
-    font-size: 46px;
-    color: #00215b;
-}
-#inicio p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-top: 15px;
-}
-
-.btn-main {
-    background: #1b3fa3;
-    color: white;
-    padding: 12px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 18px;
-    margin-top: 20px;
-    display: inline-block;
-}
-
-.btn-sec {
-    background: #e2e8f0;
-    color: #1b3fa3;
-    padding: 12px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 18px;
-    margin-left: 10px;
-    margin-top: 20px;
-    display: inline-block;
-}
-
-/* FOTO */
-.profile-photo {
-    width: 240px;
-    height: 240px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
-    transition: transform 0.3s;
-}
-.profile-photo:hover {
-    transform: scale(1.04);
-}
-
-/* CARDS */
-.cards {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-.card {
-    width: 31%;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 20px;
-    transition: 0.3s;
-}
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.18);
-}
-.card h3 {
-    color: #00215b;
-}
-.card button {
-    margin-top: 12px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: #1b3fa3;
-    color: white;
-    font-size: 16px;
-}
-
-/* DASHBOARD */
-#dashboard iframe {
-    width: 100%;
-    height: 600px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* CONTACTO */
-#contacto {
-    text-align: center;
-    background: #e8edf3;
-}
-#contacto a {
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    color: #1b3fa3;
-}
-
-#contacto .btn-main {
-    margin-top: 25px;
-}
-
-/* FOOTER */
-footer {
-    background: #00215b;
-    color: white;
-    padding: 25px;
-    text-align: center;
-    margin-top: 40px;
-}
-footer a {
-    color: #bcd1ff;
-    text-decoration: none;
-}
-
-/* RESPONSIVE */
-@media(max-width: 900px) {
-    #inicio {
-        flex-direction: column;
-        text-align: center;
+  <style>
+    :root {
+      --blue-dark: #003a70;
+      --blue-mid: #1e6fa8;
+      --blue-light: #4aa0d5;
+      --yellow: #fdbb30;
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-main: #1f2933;
+      --text-muted: #6b7280;
+      --border: #e2e8f0;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .layout {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--blue-dark), var(--blue-mid));
+      color: white;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    header span {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .user-tag {
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    main {
+      padding: 20px 24px 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter {
+      background: var(--card-bg);
+      border-radius: 999px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .grid-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
     .card {
-        width: 100%;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 8px rgba(15,23,42,0.04);
     }
-}
-</style>
+
+    .card h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .card .value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .card .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .chip.positive {
+      background: rgba(22,163,74,0.12);
+      color: #15803d;
+    }
+
+    .chip.negative {
+      background: rgba(220,38,38,0.12);
+      color: #b91c1c;
+    }
+
+    .chip.neutral {
+      background: rgba(148,163,184,0.16);
+      color: #475569;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 24px 0 10px;
+    }
+
+    .section-title h2 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-title span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chart-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 8px rgba(15,23,42,0.04);
+    }
+
+    .chart-wrapper {
+      width: 100%;
+      max-height: 360px;
+    }
+
+    .table-card {
+      margin-top: 20px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 8px rgba(15,23,42,0.04);
+    }
+
+    .table-container {
+      margin-top: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: auto;
+      max-height: 360px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 12px;
+      min-width: 900px;
+    }
+
+    thead {
+      background: #e5edf6;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th, td {
+      padding: 6px 8px;
+      text-align: right;
+      border-bottom: 1px solid #edf2f7;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child,
+    th:nth-child(2),
+    td:nth-child(2),
+    th:nth-child(3),
+    td:nth-child(3),
+    th:nth-child(4),
+    td:nth-child(4) {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .tag-ingreso {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(22,163,74,0.08);
+      color: #166534;
+    }
+
+    .tag-egreso {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(220,38,38,0.08);
+      color: #b91c1c;
+    }
+
+    .tag-tipo {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(15,118,110,0.06);
+      color: #0f766e;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      main {
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+<div class="layout">
 
-<!-- NAV -->
-<div class="navbar">
-    <div class="logo">Freddy Mandamientos</div>
-    <div class="links">
-        <a href="#inicio">Inicio</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#contacto">Contacto</a>
+  <!-- HEADER -->
+  <header>
+    <div>
+      <h1>Dashboard Comercial 2025 – Ingresos y Egresos</h1>
+      <span>Comparación Ejecutado vs Proyectado por mes (S/)</span>
     </div>
+    <div class="user-tag">
+      Freddy Mandamientos · Análisis BI
+    </div>
+  </header>
+
+  <main>
+
+    <!-- FILTROS SIMPLIFICADOS -->
+    <div class="filters">
+      <div class="filter"><strong>Año:</strong> 2025</div>
+      <div class="filter"><strong>Unidad:</strong> Soles (S/)</div>
+      <div class="filter"><strong>Escenario:</strong> Ejecutado vs Proyectado</div>
+      <div class="filter"><strong>Fuente:</strong> Gestión Comercial EGESUR</div>
+    </div>
+
+    <!-- CARDS RESUMEN -->
+    <div class="grid-summary">
+      <div class="card">
+        <h3>Total Ejecutado 2025</h3>
+        <div class="value">S/ 41,196,851.90</div>
+        <div class="chip neutral">Enero – Octubre (Noviembre y diciembre sin datos ejecutados)</div>
+      </div>
+
+      <div class="card">
+        <h3>Total Proyectado 2025</h3>
+        <div class="value">S/ 44,315,422.46</div>
+        <div class="chip neutral">Enero – Diciembre</div>
+      </div>
+
+      <div class="card">
+        <h3>Variación Ejecutado vs Proyectado</h3>
+        <div class="value">-7.04 %</div>
+        <div class="chip negative">Ejecutado por debajo del presupuesto</div>
+      </div>
+
+      <div class="card">
+        <h3>Mes con mayor resultado ejecutado</h3>
+        <div class="value">S/ 4,972,557.81</div>
+        <div class="chip positive">Septiembre 2025</div>
+      </div>
+    </div>
+
+    <!-- GRÁFICO PRINCIPAL -->
+    <div class="section-title">
+      <div>
+        <h2>Resultado mensual – Ejecutado vs Proyectado</h2>
+        <span>Suma neta de ingresos y egresos por mes (S/)</span>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-wrapper">
+        <canvas id="chartMeses"></canvas>
+      </div>
+    </div>
+
+    <!-- TABLA DETALLADA -->
+    <div class="section-title">
+      <div>
+        <h2>Detalle por Concepto</h2>
+        <span>Ingresos / Egresos por mes, ejecutado y proyectado</span>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-container">
+        <table>
+          <thead>
+          <tr>
+            <th>Concepto Simplificado</th>
+            <th>Ingreso / Egreso</th>
+            <th>Tipo</th>
+            <th>Unidad</th>
+            <th>1/01/2025</th>
+            <th>1/02/2025</th>
+            <th>1/03/2025</th>
+            <th>1/04/2025</th>
+            <th>1/05/2025</th>
+            <th>1/06/2025</th>
+            <th>1/07/2025</th>
+            <th>1/08/2025</th>
+            <th>1/09/2025</th>
+            <th>1/10/2025</th>
+            <th>1/11/2025</th>
+            <th>1/12/2025</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- EJECUTADO -->
+          <tr>
+            <td>Venta a Clientes Mercado Libre</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>156,521.91</td><td>180,537.36</td><td>182,310.50</td><td>193,920.84</td><td>204,822.80</td><td>165,625.89</td><td>155,096.37</td><td>144,227.87</td><td>164,666.62</td><td>131,588.88</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Venta a Clientes Mercado Regulado</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>9,182,991.11</td><td>9,200,565.84</td><td>9,576,122.10</td><td>8,941,342.01</td><td>8,608,550.73</td><td>8,403,823.83</td><td>8,201,862.49</td><td>8,311,532.81</td><td>8,390,018.34</td><td>8,430,164.08</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Venta por Retiros no declarados asignados por COES</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Venta al Mercado Spot - COES</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-</td><td>16,708.41</td><td>-</td><td>-</td><td>-</td><td>42,831.49</td><td>-</td><td>84,921.30</td><td>85,789.73</td><td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Compra al Mercado Spot - COES</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-2,789,383.44</td><td>-1,492,052.86</td><td>-2,370,690.88</td><td>-1,568,828.82</td><td>-1,552,316.70</td><td>-1,136,889.07</td><td>-1,490,895.91</td><td>-1,313,049.94</td><td>-1,583,803.75</td><td>-2,146,927.41</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Pagos a Distribuidoras y Aportes por C. Libres</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-58,549.59</td><td>-62,706.99</td><td>-61,785.10</td><td>-67,209.83</td><td>-62,951.68</td><td>-57,750.65</td><td>-55,073.72</td><td>-52,319.94</td><td>-56,399.20</td><td>-53,014.96</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Pago a Transmisoras</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-1,990,050.84</td><td>-1,780,495.20</td><td>-1,982,624.26</td><td>-1,926,509.10</td><td>-1,793,579.13</td><td>-1,704,669.94</td><td>-1,795,249.00</td><td>-1,553,498.75</td><td>-1,371,754.98</td><td>-2,130,183.21</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Ingresos Transmisión</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>2,469.20</td><td>2,361.77</td><td>2,525.38</td><td>2,357.72</td><td>2,388.92</td><td>1,393.52</td><td>1,389.82</td><td>1,422.27</td><td>1,418.68</td><td>1,418.68</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Pagos por Combustibles (TGP y Pluspetrol)</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-1,036,576.53</td><td>-1,014,347.77</td><td>-975,302.08</td><td>-963,321.20</td><td>-924,882.59</td><td>-998,097.54</td><td>-935,500.26</td><td>-954,381.67</td><td>-757,221.16</td><td>-722,343.29</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>FISE</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>26,695.09</td><td>29,172.25</td><td>31,027.66</td><td>29,880.11</td><td>25,492.37</td><td>24,653.25</td><td>25,609.17</td><td>25,342.61</td><td>25,175.29</td><td>28,267.85</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Otros Egresos: Compra Potencia Firme, Bono ELS</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-320,873.80</td><td>-403,675.77</td><td>-394,865.55</td><td>-475,342.72</td><td>-432,019.21</td><td>-370,376.45</td><td>-361,959.57</td><td>-360,235.21</td><td>-385,196.30</td><td>-413,654.40</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Venta en el Mercado Secundario de Gas Natural</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Ejecutado</span></td>
+            <td>Soles</td>
+            <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>47,026.58</td><td>201,503.27</td><td>223,012.51</td><td>459,864.54</td><td>79,828.00</td><td>-</td><td>-</td>
+          </tr>
+
+          <!-- PROYECTADO -->
+          <tr>
+            <td>Venta a Clientes Mercado Libre</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>156,521.91</td><td>180,537.36</td><td>182,310.50</td><td>193,920.84</td><td>204,822.80</td><td>165,625.89</td><td>155,096.37</td><td>154,451.46</td><td>153,451.48</td><td>156,643.09</td><td>155,921.77</td><td>159,407.87</td>
+          </tr>
+          <tr>
+            <td>Venta a Clientes Mercado Regulado</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>9,182,991.11</td><td>9,200,565.84</td><td>9,576,122.10</td><td>8,941,342.01</td><td>8,608,550.73</td><td>8,403,823.83</td><td>8,201,862.49</td><td>8,262,912.44</td><td>8,091,897.78</td><td>8,263,113.66</td><td>8,092,137.82</td><td>8,263,399.60</td>
+          </tr>
+          <tr>
+            <td>Venta por Retiros no declarados asignados por COES</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Venta al Mercado Spot - COES</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-</td><td>16,708.41</td><td>-</td><td>-</td><td>-</td><td>42,831.49</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>Compra al Mercado Spot - COES</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-2,789,383.44</td><td>-1,492,052.86</td><td>-2,370,690.88</td><td>-1,568,828.82</td><td>-1,552,316.70</td><td>-1,136,889.07</td><td>-1,490,908.79</td><td>-2,518,291.58</td><td>-2,392,503.85</td><td>-2,820,313.81</td><td>-2,623,854.05</td><td>-2,066,206.94</td>
+          </tr>
+          <tr>
+            <td>Pagos a Distribuidoras y Aportes por C. Libres</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>58,549.59</td><td>62,706.99</td><td>61,785.10</td><td>67,209.83</td><td>62,951.68</td><td>57,750.65</td><td>55,073.72</td><td>56,048.92</td><td>57,168.61</td><td>58,441.76</td><td>59,878.94</td><td>61,492.48</td>
+          </tr>
+          <tr>
+            <td>Pago a Transmisoras</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-1,990,050.84</td><td>-1,780,495.20</td><td>-1,982,624.26</td><td>-1,926,509.10</td><td>-1,793,579.13</td><td>-1,704,669.94</td><td>-1,795,249.00</td><td>-1,902,386.95</td><td>-1,902,603.56</td><td>-1,902,848.76</td><td>-1,903,124.10</td><td>-1,903,431.34</td>
+          </tr>
+          <tr>
+            <td>Ingresos Transmisión</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>2,469.20</td><td>2,361.77</td><td>2,525.38</td><td>2,357.72</td><td>2,388.92</td><td>1,393.52</td><td>1,389.82</td><td>1,412.98</td><td>1,439.48</td><td>1,469.47</td><td>1,503.14</td><td>1,540.72</td>
+          </tr>
+          <tr>
+            <td>Pagos por Combustibles (TGP y Pluspetrol)</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-1,036,576.53</td><td>-1,014,347.77</td><td>-975,302.08</td><td>-963,321.20</td><td>-924,882.59</td><td>-998,097.54</td><td>-935,500.26</td><td>-943,994.02</td><td>-932,966.68</td><td>-938,946.19</td><td>-905,861.00</td><td>-930,903.09</td>
+          </tr>
+          <tr>
+            <td>FISE</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>26,695.09</td><td>29,172.25</td><td>31,027.66</td><td>29,880.11</td><td>25,492.37</td><td>24,653.25</td><td>25,609.17</td><td>27,257.03</td><td>27,257.03</td><td>27,257.03</td><td>27,257.03</td><td>27,257.03</td>
+          </tr>
+          <tr>
+            <td>Otros Egresos: Compra Potencia Firme, Bono ELS</td>
+            <td><span class="tag-egreso">EGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-320,873.80</td><td>-403,675.77</td><td>-394,865.55</td><td>-475,342.72</td><td>-432,019.21</td><td>-225,553.75</td><td>-221,020.84</td><td>-218,836.44</td><td>-199,494.01</td><td>-194,167.57</td><td>-234,412.33</td><td>-309,429.57</td>
+          </tr>
+          <tr>
+            <td>Venta en el Mercado Secundario de Gas Natural</td>
+            <td><span class="tag-ingreso">INGRESO</span></td>
+            <td><span class="tag-tipo">Proyectado</span></td>
+            <td>Soles</td>
+            <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>47,026.58</td><td>201,503.27</td><td>54,000.00</td><td>54,000.00</td><td>54,000.00</td><td>54,000.00</td><td>54,000.00</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
 </div>
 
-<!-- INICIO -->
-<section id="inicio">
-    <div class="left">
-        <h3>Bienvenido a mi sitio web</h3>
-        <h1>Portafolio profesional de Business Intelligence</h1>
-        <p>Soy Freddy Isaac Mandamientos Loa, ingeniero industrial y electrónico especializado en análisis de datos, visualización avanzada, automatización y diseño de soluciones en Power BI.</p>
+<script>
+  // Datos agregados por mes (suma neta de todos los conceptos)
+  const labelsMeses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 
-        <a class="btn-main" href="#proyectos">Ver portafolio</a>
-    </div>
+  const ejecutado = [
+    3173243.11,
+    4676067.04,
+    4006717.77,
+    4166289.01,
+    4075505.51,
+    4417570.91,
+    3946782.66,
+    4556973.86,
+    4972557.81,
+    3205144.22,
+    0,
+    0
+  ];
 
-    <img class="profile-photo" 
-         src="https://github.com/freddymandamientos/Portfolio/blob/main/Freddy.jpg?raw=true"
-         alt="Foto de Freddy Mandamientos">
-</section>
+  const proyectado = [
+    3290342.29,
+    4801481.02,
+    4130287.97,
+    4300708.67,
+    4201408.87,
+    4677894.91,
+    4197855.95,
+    2972573.84,
+    2957646.28,
+    2704648.68,
+    2723447.22,
+    3357126.76
+  ];
 
-<!-- PROYECTOS -->
-<section id="proyectos">
-    <h2 style="color:#00215b;">Mis Proyectos</h2>
+  const ctx = document.getElementById('chartMeses').getContext('2d');
 
-    <div class="cards">
-
-        <div class="card">
-            <h3>Dashboard Gerencial Comercial</h3>
-            <p>Visualización ejecutiva con KPIs, tendencias y análisis comparativo.</p>
-            <button onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiN2M4YWNlMzItNGRiMi00NjQ1LWFhNzEtYzgyMTBmOGZhODNhIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9')">
-                Ver Dashboard
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>Dashboard Operativo</h3>
-            <p>Indicadores energéticos, disponibilidad, mantenimientos y análisis técnico.</p>
-            <button onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiMGVlYzhmMzEtOTVhNi00MDk2LWE1NjgtYzg0OTA5ZGVkNTQ1IiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9')">
-                Ver Dashboard
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>Repositorio de Proyectos</h3>
-            <p>Colección de análisis, automatizaciones y dashboards publicados.</p>
-            <button onclick="window.open('https://freddymandamientos.github.io/Portfolio/')">
-                Ver Portafolio
-            </button>
-        </div>
-
-    </div>
-</section>
-
-<!-- DASHBOARD -->
-<section id="dashboard">
-    <h2 style="color:#00215b;">Dashboard Integrado</h2>
-
-    <iframe src="https://app.powerbi.com/view?r=eyJrIjoiZmNlZWNmMTQtMGJhNi00ZTA3LTlhMmMtZjQxNGM3YWEzMDQwIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9"
-            allowfullscreen="true"></iframe>
-</section>
-
-<!-- CONTACTO -->
-<section id="contacto">
-    <h2>Contacto</h2>
-    <p>Puedes escribirme al correo:</p>
-
-    <a href="mailto:f.mandamientos@gmail.com">f.mandamientos@gmail.com</a>
-
-    <br><br>
-
-    <!-- NUEVA UBICACIÓN DEL CV -->
-    <a class="btn-main"
-       href="https://github.com/freddymandamientos/Portfolio/blob/main/CV%20-%20Freddy%20Isaac%20Mandamientos%20Loa.pdf?raw=true"
-       target="_blank">
-       Descargar CV
-    </a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    <div style="text-align:center; margin-bottom:15px;">
-        <img src="https://github.com/freddymandamientos/Portfolio/blob/main/QR%20-%20Portfolio.png?raw=true"
-             alt="QR Portafolio Freddy"
-             style="width:140px; height:140px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-    </div>
-
-    © 2025 – Freddy Isaac Mandamientos Loa  
-    | <a href="mailto:f.mandamientos@gmail.com">Email</a>  
-    | <a href="https://linkedin.com/in/freddyisaac" target="_blank">LinkedIn</a>
-</footer>
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labelsMeses,
+      datasets: [
+        {
+          label: 'Ejecutado',
+          data: ejecutado,
+          borderWidth: 1,
+          backgroundColor: 'rgba(26, 115, 232, 0.75)'
+        },
+        {
+          label: 'Proyectado',
+          data: proyectado,
+          borderWidth: 1,
+          backgroundColor: 'rgba(253, 187, 48, 0.8)'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          position: 'top'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const value = context.parsed.y || 0;
+              return context.dataset.label + ': S/ ' + value.toLocaleString('es-PE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              });
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: {
+            callback: function(value) {
+              return 'S/ ' + value.toLocaleString('es-PE');
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
+
