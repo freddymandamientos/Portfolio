@@ -2,28 +2,26 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>EGESUR – Margen Comercial</title>
+<title>EGESUR – Ventas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root{
   --bg:#cfeef7;
   --card:#ffffff;
-  --ing:#1f7a3f;
-  --eg:#7a1f2b;
   --dark:#002635;
-  --border:#d8e6ee;
+  --border:#d9e7ef;
+  --accent:#1e6fa8;
 }
 
 body{
   margin:0;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family:"Segoe UI", Arial, sans-serif;
   background:var(--bg);
 }
 
-.main{
-  padding:20px;
-}
+.main{ padding:20px; }
 
 /* HEADER */
 .header{
@@ -37,24 +35,43 @@ body{
   margin-bottom:20px;
 }
 
-/* GRID */
+/* KPI */
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:20px;
+}
+
+.kpi{
+  background:var(--card);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+.kpi h1{
+  margin:0;
+  font-size:22px;
+}
+
+.kpi span{
+  color:#555;
+  font-size:14px;
+}
+
+/* CONTENT */
 .grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1.2fr 1.8fr;
   gap:20px;
 }
 
-/* CARD */
 .card{
   background:var(--card);
   border-radius:16px;
   padding:16px;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-.card h2{
-  margin:0 0 12px 0;
-  font-size:18px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
 /* TABLE */
@@ -81,33 +98,6 @@ td.num{
 
 .total{
   font-weight:800;
-  color:white;
-}
-
-.total.ing{background:var(--ing);}
-.total.eg{background:var(--eg);}
-
-/* KPI */
-.kpi{
-  margin:30px auto 0;
-  background:var(--dark);
-  color:white;
-  width:60%;
-  border-radius:20px;
-  padding:24px;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
-
-.kpi h1{
-  margin:0;
-  font-size:34px;
-}
-
-.kpi small{
-  font-size:14px;
-  opacity:.8;
 }
 </style>
 </head>
@@ -117,61 +107,83 @@ td.num{
 
   <!-- HEADER -->
   <div class="header">
-    <h1>Margen Comercial</h1>
-    <span>Actualizado al 10 de diciembre 2025</span>
+    <h1>Ventas – Cargos Facturados</h1>
+    <span>Actualizado al 10 de diciembre de 2025</span>
   </div>
 
-  <!-- INGRESOS / EGRESOS -->
+  <!-- KPIS -->
+  <div class="kpis">
+    <div class="kpi">
+      <h1>251.9 GWh</h1>
+      <span>Energía Consumida</span>
+    </div>
+    <div class="kpi">
+      <h1>S/ 89 mill.</h1>
+      <span>Cargos Facturados</span>
+    </div>
+    <div class="kpi">
+      <h1>S/ 59 mill.</h1>
+      <span>Energía Activa</span>
+    </div>
+    <div class="kpi">
+      <h1>S/ 30 mill.</h1>
+      <span>Otros Cargos</span>
+    </div>
+  </div>
+
+  <!-- TABLE + CHART -->
   <div class="grid">
 
-    <!-- INGRESOS -->
+    <!-- TABLE -->
     <div class="card">
-      <h2 style="color:var(--ing)">INGRESOS</h2>
+      <h3>Cargos Facturados</h3>
       <table>
-        <tr><th>Rubro</th><th>Ejecutado</th><th>Avance</th></tr>
-        <tr><td>Clientes Libres y Regulados</td><td class="num">S/ 88,926,292</td><td class="num">100.55%</td></tr>
-        <tr><td>Venta en Mercado Secundario Gas</td><td class="num">S/ 1,011,235</td><td class="num">246.32%</td></tr>
-        <tr><td>FISE</td><td class="num">S/ 271,316</td><td class="num">98.91%</td></tr>
-        <tr><td>Spot COES</td><td class="num">S/ 230,251</td><td class="num">386.72%</td></tr>
-        <tr class="total ing">
-          <td>Total INGRESOS</td>
-          <td class="num">S/ 90,458,240</td>
-          <td class="num">101.41%</td>
+        <tr><th>Cargo</th><th>Monto</th></tr>
+        <tr><td>EAHFP</td><td class="num">S/ 46 millones</td></tr>
+        <tr><td>SPT</td><td class="num">S/ 17 millones</td></tr>
+        <tr><td>POTENCIA</td><td class="num">S/ 12 millones</td></tr>
+        <tr><td>EAHP</td><td class="num">S/ 13 millones</td></tr>
+        <tr><td>Otros</td><td class="num">S/ 1 millón</td></tr>
+        <tr class="total">
+          <td>Total</td>
+          <td class="num">S/ 89 millones</td>
         </tr>
       </table>
     </div>
 
-    <!-- EGRESOS -->
+    <!-- DONUT -->
     <div class="card">
-      <h2 style="color:var(--eg)">EGRESOS</h2>
-      <table>
-        <tr><th>Rubro</th><th>Ejecutado</th><th>Avance</th></tr>
-        <tr><td>Compra al Mercado Spot</td><td class="num">-S/ 17,444,839</td><td class="num">86.65%</td></tr>
-        <tr><td>Otros egresos</td><td class="num">-S/ 3,918,199</td><td class="num">126.97%</td></tr>
-        <tr><td>Pago a Transmisoras</td><td class="num">-S/ 18,028,614</td><td class="num">96.51%</td></tr>
-        <tr><td>Combustibles</td><td class="num">-S/ 9,281,974</td><td class="num">96.05%</td></tr>
-        <tr class="total eg">
-          <td>Total EGRESOS</td>
-          <td class="num">-S/ 49,261,388</td>
-          <td class="num">94.44%</td>
-        </tr>
-      </table>
+      <h3>Distribución de Cargos</h3>
+      <canvas id="donut"></canvas>
     </div>
 
   </div>
-
-  <!-- KPI -->
-  <div class="kpi">
-    <div>
-      <h1>S/ 41 mill.</h1>
-      <small>Margen Comercial Ejecutado</small>
-    </div>
-    <div>
-      <h1>111.22%</h1>
-      <small>Avance MC</small>
-    </div>
-  </div>
-
 </div>
+
+<script>
+const ctx = document.getElementById('donut');
+new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['EAHFP', 'SPT', 'POTENCIA', 'EAHP', 'Otros'],
+    datasets: [{
+      data: [51.56, 19.49, 13.47, 14.17, 1.31],
+      backgroundColor: [
+        '#003a52',
+        '#1e6fa8',
+        '#4aa0d5',
+        '#6bb7d6',
+        '#b6dbea'
+      ]
+    }]
+  },
+  options:{
+    plugins:{
+      legend:{ position:'bottom' }
+    }
+  }
+});
+</script>
+
 </body>
 </html>
