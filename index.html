@@ -150,45 +150,7 @@ section {
     transform: scale(1.05);
 }
 
-/* =========================
-   PROYECTOS
-========================= */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
 
-.card {
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
-    padding: 22px;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-hover);
-}
-
-.card h3 {
-    color: var(--primary);
-}
-
-.card button {
-    margin-top: 14px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: var(--secondary);
-    color: white;
-    font-size: 16px;
-}
 
 /* =========================
    DASHBOARD
@@ -283,36 +245,7 @@ footer a {
          alt="Foto de Freddy Mandamientos">
 </section>
 
-<!-- PROYECTOS -->
-<section id="proyectos">
-    <h2 style="color:var(--primary);">Mis Proyectos</h2>
 
-    <div class="cards">
-        <div class="card">
-            <h3>Dashboard Gerencial Comercial</h3>
-            <p>KPIs ejecutivos, análisis comparativo y tendencias estratégicas.</p>
-            <button onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiN2M4YWNlMzItNGRiMi00NjQ1LWFhNzEtYzgyMTBmOGZhODNhIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9')">
-                Ver Dashboard
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>Dashboard Operativo</h3>
-            <p>Indicadores energéticos, disponibilidad y análisis técnico.</p>
-            <button onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiMGVlYzhmMzEtOTVhNi00MDk2LWE1NjgtYzg0OTA5ZGVkNTQ1IiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9')">
-                Ver Dashboard
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>Repositorio de Proyectos</h3>
-            <p>Análisis, automatizaciones y dashboards publicados.</p>
-            <button onclick="window.open('https://freddymandamientos.github.io/Portfolio/')">
-                Ver Portafolio
-            </button>
-        </div>
-    </div>
-</section>
 
 <!-- DASHBOARD -->
 <section id="dashboard">
