@@ -1,156 +1,209 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<title>Gantt Mantenimientos 2026 – EGESUR</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio – Freddy Isaac Mandamientos Loa</title>
+
 <style>
-body{margin:0;font-family:Segoe UI,Arial;background:#0b1220;color:#e5e7eb}
-header{padding:16px 20px;border-bottom:1px solid #24324f}
-h1{margin:0;font-size:18px}
-.filters{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-select{background:#0f1a33;color:#fff;border:1px solid #24324f;padding:8px 10px;border-radius:8px}
-.container{padding:16px 20px}
-.legend{display:flex;gap:12px;margin-bottom:12px}
-.legend span{display:flex;align-items:center;gap:6px;font-size:13px}
-.dot{width:10px;height:10px;border-radius:50%}
-.card{background:#0f1a33;border:1px solid #24324f;border-radius:14px;overflow:hidden}
-.headerRow,.row{display:grid;grid-template-columns:300px 1fr}
-.headerRow div{padding:10px 12px;border-bottom:1px solid #24324f;font-weight:600}
-.left{padding:8px 12px;border-bottom:1px solid #1f2a44}
-.right{position:relative;height:42px;border-bottom:1px solid #1f2a44}
-.bar{position:absolute;top:9px;height:24px;border-radius:10px;cursor:pointer}
-.bar:hover{filter:brightness(1.15)}
-.tooltip{
-position:fixed;display:none;background:#020617;color:#e5e7eb;
-border:1px solid #24324f;padding:10px 12px;border-radius:10px;
-font-size:12px;max-width:380px;z-index:999
+:root {
+    --primary: #00215b;
+    --secondary: #1b3fa3;
+    --bg-main: #f5f7fa;
+    --bg-soft: #e8edf3;
+    --text-main: #1f1f1f;
+    --radius: 12px;
+    --shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
-.footer{padding:8px 12px;font-size:12px;color:#94a3b8;border-top:1px solid #24324f}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.links a {
+    margin-left: 28px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.links a:hover {
+    color: var(--secondary);
+}
+
+/* SECCIONES */
+section {
+    padding: 80px;
+}
+
+/* INICIO */
+#inicio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+#inicio h1 {
+    font-size: 44px;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+#inicio p {
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+/* BOTONES */
+.btn-main, .btn-sec {
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn-main {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-sec {
+    background: var(--bg-soft);
+    color: var(--secondary);
+    margin-left: 10px;
+}
+
+/* FOTO */
+.profile-photo {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow);
+}
+
+/* DASHBOARD */
+#dashboard iframe {
+    width: 100%;
+    height: 600px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: none;
+}
+
+/* CONTACTO */
+#contacto {
+    text-align: center;
+    background: var(--bg-soft);
+}
+
+#contacto a {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+    background: var(--primary);
+    color: white;
+    padding: 22px;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    section {
+        padding: 50px 20px;
+    }
+
+    #inicio {
+        flex-direction: column;
+        text-align: center;
+    }
+}
 </style>
 </head>
 
 <body>
-<header>
-<h1>Diagrama de Gantt – Mantenimientos 2026 (EGESUR)</h1>
-<div class="filters">
-<select id="fUbicacion"></select>
-<select id="fEquipo"></select>
-<select id="fTipo"></select>
-</div>
-</header>
 
-<div class="container">
-<div class="legend">
-<span><div class="dot" style="background:#3b82f6"></div>Mantenimiento Preventivo</span>
-<span><div class="dot" style="background:#22c55e"></div>Pruebas</span>
-<span><div class="dot" style="background:#f59e0b"></div>Otros</span>
-</div>
+<nav class="navbar">
+    <div class="logo">Freddy Mandamientos</div>
+    <div class="links">
+        <a href="#inicio">Inicio</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#contacto">Contacto</a>
+    </div>
+</nav>
 
-<div class="card">
-<div class="headerRow">
-<div>Ubicación – Equipo</div>
-<div>Cronograma</div>
-</div>
-<div id="rows"></div>
-<div class="footer" id="footer"></div>
-</div>
-</div>
+<section id="inicio">
+    <div>
+        <h1>Portafolio de Business Intelligence</h1>
+        <p>
+            Ingeniero Industrial e Ingeniero Electrónico especializado en
+            <strong>Business Intelligence y Analítica de Datos</strong>, con experiencia
+            en dashboards ejecutivos, modelado de datos y automatización de reportes
+            usando Power BI, DAX, SQL, Python y Excel Avanzado.
+        </p>
+        <a class="btn-main" href="#dashboard">Ver dashboard</a>
+        <a class="btn-sec" target="_blank"
+           href="https://github.com/freddymandamientos/Portfolio/blob/main/CV%20-%20Freddy%20Isaac%20Mandamientos%20Loa.pdf?raw=true">
+           Ver CV
+        </a>
+    </div>
 
-<div class="tooltip" id="tip"></div>
+    <img class="profile-photo"
+         src="https://github.com/freddymandamientos/Portfolio/blob/main/Freddy.jpg?raw=true"
+         alt="Freddy Mandamientos">
+</section>
 
-<script>
-// ================= DATOS =================
-const data = [
-{u:"ARICOTA I",e:"G1",i:"08/01/2026 06:30",f:"08/01/2026 13:30",t:"MANTENIMIENTO PREVENTIVO",d:"MANTENIMIENTO ELECTROMECÁNICO 1"},
-{u:"ARICOTA I",e:"G1",i:"09/04/2026 00:00",f:"29/04/2026 00:00",t:"MANTENIMIENTO PREVENTIVO",d:"MEC 3 / MODERNIZACIÓN AVR SISTEMA DE EXCITACIÓN"},
-{u:"ARICOTA I",e:"G2",i:"30/04/2026 00:00",f:"20/05/2026 00:00",t:"MANTENIMIENTO PREVENTIVO",d:"MEC 3 / MODERNIZACIÓN AVR SISTEMA DE EXCITACIÓN"},
-{u:"ARICOTA II",e:"G1",i:"22/05/2026 00:00",f:"11/06/2026 00:00",t:"MANTENIMIENTO PREVENTIVO",d:"MEC 3 / MODERNIZACIÓN AVR SISTEMA DE EXCITACIÓN"},
-{u:"INDEPENDENCIA",e:"INDEP_G1",i:"22/02/2026 05:00",f:"22/02/2026 17:00",t:"OTROS",d:"Patio de llaves y SSAA"},
-{u:"INDEPENDENCIA",e:"INDEP_G1",i:"15/07/2026 04:00",f:"19/07/2026 00:00",t:"MANTENIMIENTO PREVENTIVO",d:"Mantenimiento 4,000 horas"},
-{u:"INDEPENDENCIA",e:"INDEP_G1",i:"15/07/2026 04:00",f:"15/07/2026 08:00",t:"PRUEBAS",d:"Pruebas deflexión cigüeñal"},
-];
+<section id="dashboard">
+    <h2 style="color:var(--primary);">Dashboard Integrado</h2>
+    <iframe loading="lazy"
+        src="https://app.powerbi.com/view?r=eyJrIjoiZWE2YWU5MTEtYzJiOS00NDM0LWIwMTYtMjZiYzVmZTM0M2EwIiwidCI6IjBkYWIxZDk1LTJhMDgtNDI0My1hN2U1LWI4OWVkM2JiYzBlNyJ9"
+        allowfullscreen>
+    </iframe>
+</section>
 
-// ================= CONFIG =================
-const colors={
-"MANTENIMIENTO PREVENTIVO":"#3b82f6",
-"PRUEBAS":"#22c55e",
-"OTROS":"#f59e0b"
-};
+<section id="contacto">
+    <h2>Contacto</h2>
+    <a href="mailto:f.mandamientos@gmail.com">f.mandamientos@gmail.com</a>
+</section>
 
-const tip=document.getElementById("tip");
+<footer>
+    © 2025 – Freddy Isaac Mandamientos Loa
+</footer>
 
-// ================= FUNCIONES =================
-const parse=s=>{
-const [d,t]=s.split(" ");
-const [dd,mm,yy]=d.split("/");
-const [hh,mi]=t.split(":");
-return new Date(yy,mm-1,dd,hh,mi);
-};
-
-const fmt=d=>{
-const p=n=>String(n).padStart(2,"0");
-return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;
-};
-
-// ================= RENDER =================
-function render(){
-const rows=document.getElementById("rows");
-rows.innerHTML="";
-
-const ext=data.map(x=>({...x,di:parse(x.i),df:parse(x.f)}));
-const min=new Date(Math.min(...ext.map(x=>x.di)));
-const max=new Date(Math.max(...ext.map(x=>x.df)));
-const total=max-min;
-
-const groups={};
-ext.forEach(x=>{
-const k=`${x.u} – ${x.e}`;
-(groups[k]??=[]).push(x);
-});
-
-let count=0;
-
-Object.keys(groups).sort().forEach(k=>{
-const left=document.createElement("div");
-left.className="left";
-left.textContent=k;
-
-const right=document.createElement("div");
-right.className="right";
-
-groups[k].forEach(ev=>{
-const b=document.createElement("div");
-const l=((ev.di-min)/total)*100;
-const w=((ev.df-ev.di)/total)*100;
-b.className="bar";
-b.style.left=l+"%";
-b.style.width=Math.max(w,0.5)+"%";
-b.style.background=colors[ev.t]||"#94a3b8";
-
-const dur=((ev.df-ev.di)/36e5).toFixed(1);
-
-b.onmousemove=e=>{
-tip.style.display="block";
-tip.style.left=e.clientX+12+"px";
-tip.style.top=e.clientY+12+"px";
-tip.innerHTML=`<b>${k}</b><br>${ev.t}<br>Inicio: ${fmt(ev.di)}<br>Fin: ${fmt(ev.df)}<br>Duración: ${dur} h<br>${ev.d}`;
-};
-b.onmouseleave=()=>tip.style.display="none";
-
-right.appendChild(b);
-count++;
-});
-
-rows.appendChild(left);
-rows.appendChild(right);
-});
-
-document.getElementById("footer").textContent=
-`Eventos: ${ext.length} | Barras: ${count} | Rango: ${fmt(min)} → ${fmt(max)}`;
-}
-
-render();
-</script>
 </body>
 </html>
